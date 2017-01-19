@@ -1,8 +1,5 @@
 #!/usr/bin/python
 
-import time
-import Adafruit_CharLCD as LCD
-
 import argparse
 import base64
 import json
@@ -32,31 +29,6 @@ def get_speech_service():
 
     return discovery.build(
         'speech', 'v1beta1', http=http, discoveryServiceUrl=DISCOVERY_URL)
-
-def format_string_for_lcd(lcd_columns, lcd_rows, text_string):
-    '''
-    Returns a list of strings to print on a lcd_columns x lcd_rows display
-    Each string is lcd_columns long and contains (lcd_rows - 1) newlines
-    There will be at least len(text_string)/(lcd_columns*lcd_rows) elements
-    and at max (len(text_string)/(lcd_columns*lcd_rows) + 1) elements
-    '''
-    list_of_strings = []
-    temp_string = ''
-    
-    for i in range(len(text_string)):
-        if len(temp_string) == (lcd_columns - 1):
-            temp_string += ('\n' + text_string[i])
-            
-        temp_string += text_string[i]
-        
-        if i == (len(text_string) - 1):
-            list_of_strings += [temp_string]
-        elif (len(temp_string) != 0) and (len(temp_string) % ((lcd_columns*lcd_rows) - 1)) == 0:
-            list_of_strings += [temp_string]
-            temp_string = ''
-
-    return list_of_strings
-
 
 def main(speech_file):
     '''
@@ -96,28 +68,7 @@ def main(speech_file):
         
             for i in range(len(transcript)):
                 result_string += transcript[i]
-    
-    # Raspberry Pi pin configuration:
-    lcd_rs        = 25
-    lcd_en        = 24
-    lcd_d4        = 23
-    lcd_d5        = 17
-    lcd_d6        = 21
-    lcd_d7        = 22
-
-    # Define LCD column and row size for 16x2 LCD.
-    lcd_columns = 16
-    lcd_rows    = 2
-
-    # Initialize the LCD using the pins above.
-    lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows)
-
-    messages = format_string_for_lcd(lcd_columns, lcd_rows, result_string)
-    for msg in messages:
-        lcd.clear()
-        lcd.message(msg)
-        time.sleep(3.0)
-    
+              
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
