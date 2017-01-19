@@ -40,6 +40,13 @@ else
 	echo "Recording Not Saved"
 fi
 
+##############################
+##### Setting up PaPiRus #####
+#############################
+	# 2" screen
+	
+sudo papirus-set [2.0]
+
 #################################
 ##### Calling Python Script #####
 #################################
