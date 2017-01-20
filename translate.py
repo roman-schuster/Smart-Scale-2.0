@@ -24,3 +24,15 @@ def azure_translate(text, from_lang = 'en', to_lang = 'fr'):
     
     
     response = requests.get('https://api.microsofttranslator.com/v2/http.svc', params = req)
+
+def main(token):
+    translated_text = azure_translate('hello, how are you doing?')
+    print(translated_text.text)
+    
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        'speech_file', help='/Users/roman/Desktop/audio.raw')
+    args = parser.parse_args()
+    main(args.speech_file)
+    
