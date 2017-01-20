@@ -1,3 +1,7 @@
+import requests
+import json
+import urllib
+
 token = 'get this from command line'
 
 def azure_translate(text, from_lang = 'en', to_lang = 'fr'):
@@ -17,3 +21,6 @@ def azure_translate(text, from_lang = 'en', to_lang = 'fr'):
         'from' : from_lang,
         'to' : to_lang
     }
+    
+    
+    response = requests.get('https://api.microsofttranslator.com/v2/http.svc', params = req)
