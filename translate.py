@@ -1,12 +1,19 @@
-token = 'test'
-# gotten from command line arg - token will be a base 64 encoded plain-text file
+token = 'get this from command line'
 
-txt = 'here, have some text'
-to_lang = 'fr'
-
-translation_request = {
-    'appid' : ('Bearer ' + token),
-    'text' : txt,
-    'from' : 'en',
-    'to' : to_lang,
-}
+def azure_translate(text, from_lang = 'en', to_lang = 'fr'):
+    '''
+    Constructs json request for Microsoft Azure request
+    Args:
+        text: string to be translated
+        from_lang: string with language code for language text is originally in (defaults to english)
+        to_lang: string with language code for language to translate text in to (defaults to french)
+    Returns:
+        translated_text: string translated in new language
+    '''
+    
+    req = {
+        'Authorization': ('Bearer ' + token),
+        'text' : text,
+        'from' : from_lang,
+        'to' : to_lang
+    }
