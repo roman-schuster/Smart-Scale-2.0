@@ -2,7 +2,6 @@ import requests
 import json
 import urllib
 
-token = 'get this from command line'
 
 def azure_translate(text, from_lang = 'en', to_lang = 'fr'):
     '''
@@ -32,7 +31,7 @@ def main(token):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        'speech_file', help='/Users/roman/Desktop/audio.raw')
+        'token')
     args = parser.parse_args()
-    main(args.speech_file)
+    main(args.token)
     
