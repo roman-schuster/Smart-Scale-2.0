@@ -1,6 +1,7 @@
 import requests
 import json
 import urllib
+import argparse
 
 
 def azure_translate(text, from_lang = 'en', to_lang = 'fr'):
